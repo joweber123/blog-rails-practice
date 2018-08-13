@@ -1,0 +1,32 @@
+<h1>full list of articles</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Author</th>
+    <th>Text</th>
+    <th>User</th>
+    <th>Time-created</th>
+  </tr>
+
+  <% @posts.each do |post| %>
+    <tr>
+      <td><%= post.title %></td>
+      <td><%= post.author %></td>
+      <td><%= post.text %></td>
+      <td><%= post.user.email%></td>
+      <td><%= post.created_at %></td>
+      <td><%= link_to 'Show', post_path(post) %></td>
+      <% if post.user == current_user %>
+        <td><%= link_to 'Edit', edit_post_path(post) %></td>
+        <td><%= link_to 'Destroy', post_path(post),
+        method: :delete,
+        data: {confirm: 'sure you want to destroy? '}
+        %>
+      <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to 'make new post', new_post_path %>
